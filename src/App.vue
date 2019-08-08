@@ -1,32 +1,20 @@
 <template>
   <div id="app">
-    <beer-list :beers="beers" ></beer-list>
+    <nav>
+      <router-link :to="{ name: 'beers'}">Beers</router-link>
+      <router-link :to="{ name: 'favourites'}">Favourties</router-link>
+
+    </nav>
+    <router-view id="view"></router-view>
   </div>
 </template>
 
 <script>
-import BeerList from './components/BeerList.vue'
 
 export default {
-  name: 'app',
+  name: 'app'
 
-  data(){
-    return {
-      beers: []
-    }
-  },
 
-  mounted(){
-    fetch('https://api.punkapi.com/v2/beers')
-    .then(response => response.json())
-    .then(beers => this.beers = beers)
-  },
-
-  
-
-  components: {
-    "beer-list": BeerList
-  }
 }
 
 

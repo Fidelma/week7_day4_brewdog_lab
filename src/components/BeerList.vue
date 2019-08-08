@@ -1,19 +1,27 @@
 <template lang="html">
-  <select>
-    <option v-for="beer in beers">{{beer.name}}</option>
+  <select v-on:change="handleChange" v-model="selectedBeer">
+    <option v-for="beer in beers" :value="beer">{{beer.name}}</option>
   </select>
 </template>
 
 <script>
+import {eventBus} from '../main.js';
+
 export default {
   name: "beer-list",
-  props: ['beers']
+  props: ['beers'],
 
-  // data(){
-  //   return {
-  //     "selectedBeer": {}
-  //   }
-  // },
+  data(){
+    return {
+      "selectedBeer": {}
+    }
+  },
+
+  methods: {
+    handleChange() {
+      eventBus.$emit('beer-changed', this.selectedBeer);
+    }
+  }
 
 
 }
